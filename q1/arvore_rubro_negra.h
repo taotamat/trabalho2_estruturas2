@@ -1,5 +1,4 @@
 typedef struct NO_LISTA{
-    struct NO_LISTA *ant; // Nó antecessor presente na lista.
     int nmr_linha; // linha onde a palavra se encontra no arquivo.
     int nmr_ordem_linha; // posição onde a palavra se encontra na linha.
     struct NO_LISTA *prox; // Proximo nó presente na lista.
@@ -36,6 +35,8 @@ void apresentaCOR(int cor);
 void preordem(NO *aux);
 void inordem(NO *aux);
 void posordem(NO *aux);
+int vazia(LISTA *lista);
+void insereLISTA(LISTA *lista, NO_LISTA *no);
 void inserir(ARVORE *arvore, NO **raiz, NO *novo);
 void ler(NO *no);
-void gestaoLER(ARVORE *arvore);
+void gestaoINSERCAO(ARVORE *arvore, char *palavra, int linha, int ordem);

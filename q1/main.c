@@ -52,7 +52,9 @@ int main(){
 
 	int op;
 	ARVORE *arvore;
+	FILE *arq;
 
+	arq = fopen("arquivo.txt", "r");
 	arvore = alocaARV();
 
 	do{
@@ -70,7 +72,8 @@ int main(){
 
 			case 1:
 				// FUNÇÃO TAL
-				gestaoLER(arvore);
+				lerARQUIVO(arq, arvore);
+				//gestaoLER(arvore);
 				break;
 
 			case 2:
