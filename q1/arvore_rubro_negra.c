@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <locale.h>
 #include <ctype.h>
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
@@ -66,19 +67,34 @@ void trocaCor(NO *H){
 
 void apresentaCOR(int cor){
 	if(cor == RED)
-		printf(" | RED   ");
+		printf("RED    \n");
 	else
-		printf(" | BLACK "); }
+		printf("BLACK  \n"); }
 
 /*-------Apresentações---------*/
+
+// Apresenta as posições que uma posição 
+void apresentaLISTA(NO_LISTA *aux) {
+	if(aux != NULL){
+		printf("%d, ", aux->nmr_linha);
+		apresentaLISTA(aux->prox);
+	} }
+
+void apresentaNO(NO *aux){
+	ast();
+	printf("%s - ", aux->palavra);
+	apresentaCOR(aux->cor);
+	printf("Esta palavra aparece %d vezes. \n", aux->qnt_vezes);
+	printf("Linhas: \n");
+	apresentaLISTA(aux->lista_posicoes->ini);
+	printf("\n");
+}
 
 // Função que apresenta todos os NOs da árvore em Pré-Ordem
 void preordem(NO *aux) {
 	// Raiz, esquerda, direita;
 	if(aux != NULL){
-		printf("%s ", aux->palavra);
-		apresentaCOR(aux->cor);
-		printf("\t| - %d vezes. \n", aux->qnt_vezes);
+		apresentaNO(aux);
 		preordem(aux->esq);
 		preordem(aux->dir);
 	} }
@@ -88,9 +104,7 @@ void inordem(NO *aux) {
 	// esquerda, Raiz, direita;
 	if(aux != NULL){
 		inordem(aux->esq);
-		printf("%s ", aux->palavra);
-		apresentaCOR(aux->cor);
-		printf("\t| %d vezes. \n", aux->qnt_vezes);
+		apresentaNO(aux);
 		inordem(aux->dir);
 	} }
 
@@ -100,9 +114,7 @@ void posordem(NO *aux) {
 	if(aux != NULL){
 		posordem(aux->esq);
 		posordem(aux->dir);
-		printf("%s ", aux->palavra);
-		apresentaCOR(aux->cor);
-		printf("\t| %d vezes. \n", aux->qnt_vezes);
+		apresentaNO(aux);
 	} }
 
 /*------- Inserção ---------*/
@@ -246,6 +258,54 @@ void gestaoINSERCAO(ARVORE *arvore, char *palavra, int linha, int ordem) {
 	novo->lista_posicoes = lista;
 
 	inserir(arvore, &(arvore->raiz), novo); }
+
+
+
+// 
+NO *buscar(NO *raiz, char *palavra, int *passos) {
+
+	NO *encontrado;
+	int comparacao;
+	encontrado = NULL;
+
+	if( raiz != NULL ){
+
+		(*passos) = (*passos) + 1;
+		comparacao = strcmp(raiz->palavra, palavra);
+
+		if( comparacao == 0 ){
+			encontrado = raiz;
+		} else if( comparacao > 0 ) {
+			encontrado = buscar(raiz->esq, palavra, passos);
+		} else if( comparacao < 0 ){
+			encontrado = buscar(raiz->dir, palavra, passos); }
+	}
+
+	return encontrado; }
+
+
+void gestaoBUSCA(ARVORE *arvore){
+	char palavra[101];
+	NO *encontrado;
+	int passos = 0;
+
+	printf("Digite a palavra que deseja buscar: ");
+	scanf(" %[^\n]s", palavra);
+	setbuf(stdin, NULL);
+	minusculo(palavra);
+	//
+
+	encontrado = buscar(arvore->raiz, palavra, &passos);
+	
+	if(encontrado != NULL){
+		printf("Palavra encontrada! \n\n");
+		printf("Quantidade de passos para encontrar a palavra: %d \n", passos);
+		apresentaNO(encontrado);
+	} else 
+		printf("Esta palavra nao foi encontrada! \n");
+	
+}
+
 
 
 

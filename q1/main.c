@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <locale.h>
 #include <ctype.h>
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
@@ -10,7 +11,18 @@
 /*
 	
 	Enunciado da questão:
-	
+	Faça um programa em C de referência cruzada que construa uma árvore binária de busca
+	vermelha-preta, com:
+	[OK] - todas as palavras incluídas a partir de um arquivo texto, 
+	[OK] - e armazene o número de cada linha em que a palavra foi usada. 
+	[OK] - Os números das linhas devem ser armazenados em uma lista encadeada associada ao nó da árvore. 
+	[OK] - Depois do arquivo de entrada ter sido processado, imprima em ordem alfabética todas as palavras do arquivo texto, 
+	[OK] - junto com os números das linhas onde foi usada. 
+
+	[OK] - O programa deve permitir o usuário buscar uma palavra 
+	[OK] - e o programa deve responder em quais linhas do texto ela foi utilizada, 
+	[OK] - para cada palavra buscada mostre o número de passos até alcançar a palavra na árvore. 
+	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha bem como acrescentar.
 
 */
 
@@ -28,11 +40,11 @@ int menu(){
 	printf("\t\t\tMENU PRINCIPAL:\n");
 	ast();
 	
-	printf("[1] - Inserir uma nova palavra  \n");
+	printf("[1] - Ler o arquivo             \n");
 	printf("[2] - Apresentacao em pre-ordem \n");
 	printf("[3] - Apresentacao em in-ordem  \n");
 	printf("[4] - Apresentacao em pos-ordem \n");
-	printf("[5] - Opcao 5\n");
+	printf("[5] - Buscar uma palavra        \n");
 	printf("[6] - Opcao 6\n");
 	printf("[0] - Sair\n");
 
@@ -49,6 +61,8 @@ int menu(){
 // FUNÇÃO MAIN:
 
 int main(){
+
+	setlocale(LC_ALL, "Portuguese");
 
 	int op;
 	ARVORE *arvore;
@@ -71,28 +85,28 @@ int main(){
 				break;
 
 			case 1:
-				// FUNÇÃO TAL
+				// FUNÇÃO que ler o arquivo e insere todas as palavras na árvore.
 				lerARQUIVO(arq, arvore);
-				//gestaoLER(arvore);
 				break;
 
 			case 2:
-				// FUNÇÃO TAL
+				// FUNÇÃO que apresenta as palavras na árvore em pré-ordem
 				preordem(arvore->raiz);
 				break;
 
 			case 3:
-				// FUNÇÃO TAL
+				// FUNÇÃO que apresenta as palavras na árvore em in-ordem
 				inordem(arvore->raiz);
 				break;
 
 			case 4:
-				// FUNÇÃO TAL
+				// FUNÇÃO que apresenta as palavras na árvore em pós-ordem
 				posordem(arvore->raiz);
 				break;
 
 			case 5:
-				// FUNÇÃO TAL
+				// FUNÇÃO que busca uma palavra na árvore.
+				gestaoBUSCA(arvore);
 				break;
 
 			case 6:

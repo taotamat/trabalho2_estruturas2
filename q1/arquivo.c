@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include <locale.h>
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
 #include "arquivo.h"

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <locale.h>
 #include <ctype.h>
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
