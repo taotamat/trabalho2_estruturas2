@@ -7,6 +7,7 @@
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
 #include "arquivo.h"
+#include "remocao.h"
 
 /*
 	
@@ -22,7 +23,8 @@
 	[OK] - O programa deve permitir o usuário buscar uma palavra 
 	[OK] - e o programa deve responder em quais linhas do texto ela foi utilizada, 
 	[OK] - para cada palavra buscada mostre o número de passos até alcançar a palavra na árvore. 
-	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha bem como acrescentar.
+	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha 
+	[  ] - bem como acrescentar.
 
 */
 
@@ -68,7 +70,7 @@ int main(){
 	ARVORE *arvore;
 	FILE *arq;
 
-	arq = fopen("arquivo.txt", "r");
+	arq = fopen("arquivo2.txt", "r");
 	arvore = alocaARV();
 
 	do{
@@ -111,6 +113,11 @@ int main(){
 
 			case 6:
 				// FUNÇÃO TAL
+				break;
+
+			case 7:
+				// FUNÇÃO que remove uma palavra da árvore
+				gestaoREMOVER(arvore);
 				break;
 
 			default:

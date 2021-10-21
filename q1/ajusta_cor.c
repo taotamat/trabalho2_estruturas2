@@ -55,7 +55,7 @@ NO *gestaoBALANCEAMENTO(ARVORE *arvore, NO **aux){
         if( *aux == arvore->raiz && cor(*aux) == RED )
             (*aux)->cor = BLACK;
     
-    } else printf("eh null\n");
+    } 
         
     return (*aux); }
 

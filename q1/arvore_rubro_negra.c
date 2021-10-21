@@ -7,6 +7,7 @@
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
 #include "arquivo.h"
+#include "remocao.h"
 
 #define RED 1
 #define BLACK 0
@@ -31,11 +32,18 @@ LISTA *alocaLISTA(){
 	nova->fim = NULL;
 	return nova; }
 
+INFO *alocaINFO(){
+	INFO *novo;
+	novo = (INFO *) malloc(sizeof(INFO));
+	novo->lista_posicoes = NULL;
+	novo->qnt_vezes = 1;
+	return novo; }
+
+
 NO *alocaNO(){
 	NO *novo;
 	novo = (NO *) malloc(sizeof(NO));
-	novo->lista_posicoes = NULL;
-	novo->qnt_vezes = 1;
+	novo->info = NULL;
 	novo->esq = NULL;
 	novo->dir = NULL;
 	novo->cor = RED;
@@ -82,11 +90,11 @@ void apresentaLISTA(NO_LISTA *aux) {
 
 void apresentaNO(NO *aux){
 	ast();
-	printf("%s - ", aux->palavra);
+	printf("%s - ", aux->info->palavra);
 	apresentaCOR(aux->cor);
-	printf("Esta palavra aparece %d vezes. \n", aux->qnt_vezes);
+	printf("Esta palavra aparece %d vezes. \n", aux->info->qnt_vezes);
 	printf("Linhas: \n");
-	apresentaLISTA(aux->lista_posicoes->ini);
+	apresentaLISTA(aux->info->lista_posicoes->ini);
 	printf("\n");
 }
 
@@ -189,7 +197,7 @@ void inserir(ARVORE *arvore, NO **raiz, NO *novo) {
 	int comparacao;
 
 	if(*raiz != NULL)
-		comparacao = strcmp(novo->palavra, (*raiz)->palavra);
+		comparacao = strcmp(novo->info->palavra, (*raiz)->info->palavra);
 
 	if( *raiz == NULL ){
 		// arvore não possue uma raiz, então o novo é a nova raiz.
@@ -220,9 +228,9 @@ void inserir(ARVORE *arvore, NO **raiz, NO *novo) {
 
 	} else if(comparacao == 0){
 		// Fazer a parte de igualdade.
-		insereLISTA( (*raiz)->lista_posicoes, novo->lista_posicoes->ini );
-		(*raiz)->qnt_vezes = (*raiz)->qnt_vezes + 1;
-		novo->lista_posicoes = NULL;
+		insereLISTA( (*raiz)->info->lista_posicoes, novo->info->lista_posicoes->ini );
+		(*raiz)->info->qnt_vezes = (*raiz)->info->qnt_vezes + 1;
+		novo->info->lista_posicoes = NULL;
 		free(novo);
 	}
 
@@ -232,7 +240,7 @@ void inserir(ARVORE *arvore, NO **raiz, NO *novo) {
 // Função que ler os dados do novo NO;
 void ler(NO *no){
 	printf("Digite uma string para o novo NO: ");
-	scanf(" %[^\n]s", (*no).palavra);
+	scanf(" %[^\n]s", no->info->palavra);
 	setbuf(stdin, NULL); }
 
 // Função que aloca espaço para um novo NO e chama a função de leitura.
@@ -242,20 +250,24 @@ void gestaoINSERCAO(ARVORE *arvore, char *palavra, int linha, int ordem) {
 	Realiza a cópia do conteúdo de uma variável a outra.
 	*/
 	NO *novo;
+	INFO *info;
 	LISTA *lista;
 	NO_LISTA *no_lista;
 
 	novo = alocaNO();
+	info = alocaINFO();
 	lista = alocaLISTA();
 	no_lista = alocaNO_LISTA();
 
-	strcpy(novo->palavra, palavra);
+	strcpy(info->palavra, palavra);
 
 	no_lista->nmr_linha = linha;
 	no_lista->nmr_ordem_linha = ordem;
 
 	insereLISTA(lista, no_lista);
-	novo->lista_posicoes = lista;
+	info->lista_posicoes = lista;
+
+	novo->info = info;
 
 	inserir(arvore, &(arvore->raiz), novo); }
 
@@ -271,7 +283,7 @@ NO *buscar(NO *raiz, char *palavra, int *passos) {
 	if( raiz != NULL ){
 
 		(*passos) = (*passos) + 1;
-		comparacao = strcmp(raiz->palavra, palavra);
+		comparacao = strcmp(raiz->info->palavra, palavra);
 
 		if( comparacao == 0 ){
 			encontrado = raiz;

@@ -1,7 +1,6 @@
 typedef struct NO_LISTA{
     int nmr_linha; // linha onde a palavra se encontra no arquivo.
     int nmr_ordem_linha; // posição onde a palavra se encontra na linha.
-    //FILE *posicao;
     struct NO_LISTA *prox; // Proximo nó presente na lista.
 } NO_LISTA;
 
@@ -10,10 +9,15 @@ typedef struct LISTA{
     struct NO_LISTA *fim; // Nó final da lista.
 } LISTA;
 
-typedef struct NO {
+
+typedef struct INFO {
     char palavra[50]; // String que armazena a palavra.
     LISTA *lista_posicoes; // Lista de posições onde a palavra se encontra no texto.
     int qnt_vezes; // Quantidade de vezes q a palavra aparece no texto.
+} INFO;
+
+typedef struct NO { 
+    INFO *info;
     struct NO *esq; // Filho da esquerda
     struct NO *dir; // Filho da direita
     int cor; // cor do nó

@@ -55,7 +55,6 @@ NO *maior_da_esquerda(NO *aux){
 	resultado = NULL;
 
 	if( aux != NULL ){
-		// printf("aux->dado = %d \n", aux->dado);
 		if( aux->dir == NULL )
 			resultado = aux;
 		else
