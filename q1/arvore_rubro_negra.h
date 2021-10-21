@@ -47,5 +47,6 @@ void insereLISTA(LISTA *lista, NO_LISTA *no);
 void inserir(ARVORE *arvore, NO **raiz, NO *novo);
 void ler(NO *no);
 void gestaoINSERCAO(ARVORE *arvore, char *palavra, int linha, int ordem);
+void gestaoLER(ARVORE *arvore);
 NO *buscar(NO *raiz, char *palavra, int *passos);
 void gestaoBUSCA(ARVORE *arvore);

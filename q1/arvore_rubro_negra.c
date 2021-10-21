@@ -243,6 +243,9 @@ void ler(NO *no){
 	scanf(" %[^\n]s", no->info->palavra);
 	setbuf(stdin, NULL); }
 
+
+
+
 // Função que aloca espaço para um novo NO e chama a função de leitura.
 void gestaoINSERCAO(ARVORE *arvore, char *palavra, int linha, int ordem) {
 	/*
@@ -271,6 +274,26 @@ void gestaoINSERCAO(ARVORE *arvore, char *palavra, int linha, int ordem) {
 
 	inserir(arvore, &(arvore->raiz), novo); }
 
+
+
+void gestaoLER(ARVORE *arvore){
+	
+	char palavra[101];
+	int linha;
+	int ordem;
+
+	printf("Digite a palavra que deseja inserir: ");
+	scanf(" %[^\n]s", palavra);
+	setbuf(stdin, NULL);
+	minusculo(palavra);
+
+	printf("Digite a linha dessa palavra: ");
+	scanf("%d", &linha);
+	
+	printf("Digite a ordem (numero inteiro) que essa palavra aparece na linha: ");
+	scanf("%d", &ordem);
+
+	gestaoINSERCAO(arvore, palavra, linha, ordem); }
 
 
 // 

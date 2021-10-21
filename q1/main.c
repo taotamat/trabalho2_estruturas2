@@ -23,8 +23,8 @@
 	[OK] - O programa deve permitir o usuário buscar uma palavra 
 	[OK] - e o programa deve responder em quais linhas do texto ela foi utilizada, 
 	[OK] - para cada palavra buscada mostre o número de passos até alcançar a palavra na árvore. 
-	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha 
-	[  ] - bem como acrescentar.
+	[OK] - Além disso, ele deve permitir excluir uma palavra de uma linha 
+	[OK] - bem como acrescentar.
 
 */
 
@@ -47,7 +47,8 @@ int menu(){
 	printf("[3] - Apresentacao em in-ordem  \n");
 	printf("[4] - Apresentacao em pos-ordem \n");
 	printf("[5] - Buscar uma palavra        \n");
-	printf("[6] - Opcao 6\n");
+	printf("[6] - Inserir uma nova palavra  \n");
+	printf("[7] - Remover uma palavra       \n");
 	printf("[0] - Sair\n");
 
 	ast();
@@ -112,7 +113,8 @@ int main(){
 				break;
 
 			case 6:
-				// FUNÇÃO TAL
+				// FUNÇÃO que insere uma nova palavra na árvore.
+				gestaoLER(arvore);
 				break;
 
 			case 7:
