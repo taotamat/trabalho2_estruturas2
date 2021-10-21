@@ -7,6 +7,7 @@
 #include "arvore_rubro_negra.h"
 #include "ajusta_cor.h"
 #include "arquivo.h"
+#include "remocao.h"
 
 #define RED 1
 #define BLACK 0
@@ -86,7 +87,7 @@ void lerARQUIVO(FILE *arq, ARVORE *arvore){
 	char palavra[100];
 	int trava = 0;
 
-	int linha = 1;
+	int linha = 0;
 	int ordem = 1;
 
 
