@@ -26,7 +26,7 @@
 	[OK] - para cada palavra buscada mostre o número de passos até alcançar a palavra na árvore. 
 
 	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha 
-	[  ] - bem como acrescentar.
+	[OK] - bem como acrescentar.
 
 */
 
@@ -116,7 +116,7 @@ int main(){
 
 			case 6:
 				// FUNÇÃO que insere uma nova palavra na árvore.
-				//gestaoLER(arvore);
+				gestaoLER(arvore);
 				break;
 
 			case 7:
