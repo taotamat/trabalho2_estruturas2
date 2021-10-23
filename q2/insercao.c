@@ -14,7 +14,7 @@
 // comparacao1 e comparacao2 recebem 0 qnd as duas strings são iguais.
 // comparacao1 e comparacao2 recebem -1 qnd a string da nova info é menor que a info da raiz
 // comparacao1 e comparacao2 recebem 1 qnd a string da nova info é maior que a info da raiz.
-void comparar(NO **raiz, INFO **info, int *comparacao1, int *comparacao2){
+void comparar(NO **raiz, char *palavra, int *comparacao1, int *comparacao2){
 	
 	/*
 	strcmp:
@@ -22,7 +22,7 @@ void comparar(NO **raiz, INFO **info, int *comparacao1, int *comparacao2){
 	se Return value > 0 então indica str2 é menor que str1. */
 
 	if( (*raiz)->info1 != NULL ){
-		*comparacao1 = strcmp( (*info)->palavra, (*raiz)->info1->palavra );
+		*comparacao1 = strcmp( palavra, (*raiz)->info1->palavra );
 
 		if( *comparacao1 < 0 )
 			*comparacao1 = -1;
@@ -31,7 +31,7 @@ void comparar(NO **raiz, INFO **info, int *comparacao1, int *comparacao2){
 	}
 
 	if( (*raiz)->info2 != NULL ){
-		*comparacao2 = strcmp( (*info)->palavra, (*raiz)->info2->palavra ); 
+		*comparacao2 = strcmp( palavra, (*raiz)->info2->palavra ); 
 
 		if( *comparacao2 < 0 )
 			*comparacao2 = -1;
@@ -43,12 +43,12 @@ void comparar(NO **raiz, INFO **info, int *comparacao1, int *comparacao2){
 // Retorna 1 se a info1 da raiz fir igual a info a ser inserida.
 // Retorna 2 se a info2 da raiz for igual a info a ser inserida.
 // Retorna 0 se nenhum adas informações da raiz for igual com a informação a ser inserida.
-int temIGUAL(NO **raiz, INFO **info){
+int temIGUAL(NO **raiz, char *palavra){
 
 	int comparacao1=-2, comparacao2=-2;
 	int igual = 0;
 
-	comparar(raiz, info, &comparacao1, &comparacao2);
+	comparar(raiz, palavra, &comparacao1, &comparacao2);
 
 	if( comparacao1 == 0 )
 		igual = 1;
@@ -74,7 +74,7 @@ NO *addNO(NO *raiz, INFO *info, NO *filho){
 
 	int comparacao;
 
-	comparar(&raiz, &info, &comparacao, NULL);
+	comparar(&raiz, info->palavra, &comparacao, NULL);
 
 	if( comparacao == 1 ){
 		
@@ -97,7 +97,7 @@ int quebraNO(NO **raiz, INFO **info, INFO **sobe, NO **maior) {
 	int comparacao2 = -2;
 	int caso;
 
-	comparar(raiz, info, &comparacao1, &comparacao2);
+	comparar(raiz, (*info)->palavra, &comparacao1, &comparacao2);
 	
 	if( *maior == NULL )
 		*maior = alocaNO();
@@ -238,7 +238,7 @@ void inserir(NO **raiz, INFO **info, NO **pai, INFO **sobe, NO **maior, ARVORE *
 	int c = -2;
 
 	if(*raiz != NULL)
-		c = temIGUAL(raiz, info);
+		c = temIGUAL(raiz, (*info)->palavra );
 	
 	if( *raiz == NULL ){
 		// Primeiro item a ser inserido na árvore.
@@ -262,7 +262,7 @@ void inserir(NO **raiz, INFO **info, NO **pai, INFO **sobe, NO **maior, ARVORE *
 		// A raiz não é NULA.
 		// A raiz não possue a mesma palavra que a raiz.
 		// A raiz não é folha.
-		comparar(raiz, info, &comparacao1, &comparacao2);
+		comparar(raiz, (*info)->palavra, &comparacao1, &comparacao2);
 
 		if( comparacao1 == -1 ) {
 			// foi pra esquerda

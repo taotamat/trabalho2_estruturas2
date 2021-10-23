@@ -202,9 +202,67 @@ void insereLISTA(LISTA *lista, NO_LISTA *no){
 		}
 	} }
 
+/* ----------------------------------- FUNÇÕES ARVORES ----------------------------------- */
+
+INFO *buscar(NO *raiz, char *palavra, int *passos){
+
+	INFO *encontrado;
+	int c = -2;
+	int comparacao1 = -2, comparacao2 = -2;
+	encontrado = NULL;
+
+	if( raiz != NULL ){
+
+		c = temIGUAL(&raiz, palavra);
+
+		if( c != 0 ){
+			// A raiz possui a palavra buscada!
+			if( c == 1 )
+				encontrado = raiz->info1;
+			else
+				encontrado = raiz->info2;
+
+		} else {
+
+			comparar(&raiz, palavra, &comparacao1, &comparacao2);
+			*passos = *passos + 1;
+
+			if( comparacao1 == -1 ) {
+				// foi pra esquerda
+				encontrado = buscar(raiz->esq, palavra, passos);
+			} else if( ( comparacao1 == 1 && raiz->nmrINFO == 1) || comparacao2 == -1 ) {
+				// foi pro centro
+				encontrado = buscar(raiz->cen, palavra, passos);
+			} else if( comparacao2 == 1 ) {
+				// foi pra direita
+				encontrado = buscar(raiz->dir, palavra, passos);
+			}
+		}
+	}
+	return encontrado; }
 
 
 
+void gestaoBUSCA(ARVORE *arvore){
+	
+	char palavra[101];
+	INFO *encontrado;
+	int passos = 0;
+
+	printf("Digite a palavra que deseja buscar: ");
+	scanf(" %[^\n]s", palavra);
+	setbuf(stdin, NULL);
+	minusculo(palavra);
+	//
+
+	encontrado = buscar(arvore->raiz, palavra, &passos);
+	
+	if(encontrado != NULL){
+		printf("Palavra encontrada! \n\n");
+		printf("Quantidade de passos para encontrar a palavra: %d \n", passos);
+		apresentaINFO(encontrado);
+	} else 
+		printf("Esta palavra nao foi encontrada! \n"); }
 
 
 

@@ -21,10 +21,10 @@
 	[OK] - Depois do arquivo de entrada ter sido processado, imprima em ordem alfabética todas as palavras do arquivo texto, 
 	[OK] - junto com os números das linhas onde foi usada. 
 
-	[  ] - O programa deve permitir o usuário buscar uma palavra 
-	[  ] - e o programa deve responder em quais linhas do texto ela foi utilizada, 
-	[  ] - para cada palavra buscada mostre o número de passos até alcançar a palavra na árvore. 
-	
+	[OK] - O programa deve permitir o usuário buscar uma palavra 
+	[OK] - e o programa deve responder em quais linhas do texto ela foi utilizada, 
+	[OK] - para cada palavra buscada mostre o número de passos até alcançar a palavra na árvore. 
+
 	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha 
 	[  ] - bem como acrescentar.
 
@@ -111,7 +111,7 @@ int main(){
 
 			case 5:
 				// FUNÇÃO que busca uma palavra na árvore.
-				//gestaoBUSCA(arvore);
+				gestaoBUSCA(arvore);
 				break;
 
 			case 6:

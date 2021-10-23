@@ -53,4 +53,6 @@ int qntINFO(NO *no);
 NO *ajustaNMRS(NO *no);
 int vazia(LISTA *lista);
 void insereLISTA(LISTA *lista, NO_LISTA *no);
+INFO *buscar(NO *raiz, char *palavra, int *passos);
+void gestaoBUSCA(ARVORE *arvore);
 

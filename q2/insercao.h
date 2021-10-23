@@ -1,6 +1,6 @@
 // insercao.h
-void comparar(NO **raiz, INFO **info, int *comparacao1, int *comparacao2);
-int temIGUAL(NO **raiz, INFO **info);
+void comparar(NO **raiz, char *palavra, int *comparacao1, int *comparacao2);
+int temIGUAL(NO **raiz, char *palavra);
 INFO *incrementaLISTA(INFO *infoRAIZ, INFO *info);
 NO *addNO(NO *raiz, INFO *info, NO *filho);
 int quebraNO(NO **raiz, INFO **info, INFO **sobe, NO **maior);
