@@ -95,8 +95,7 @@ void apresentaNO(NO *aux){
 	printf("Esta palavra aparece %d vezes. \n", aux->info->qnt_vezes);
 	printf("Linhas: \n");
 	apresentaLISTA(aux->info->lista_posicoes->ini);
-	printf("\n");
-}
+	printf("\n"); }
 
 // Função que apresenta todos os NOs da árvore em Pré-Ordem
 void preordem(NO *aux) {
@@ -337,9 +336,23 @@ void gestaoBUSCA(ARVORE *arvore){
 		printf("Quantidade de passos para encontrar a palavra: %d \n", passos);
 		apresentaNO(encontrado);
 	} else 
-		printf("Esta palavra nao foi encontrada! \n");
-	
-}
+		printf("Esta palavra nao foi encontrada! \n"); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
