@@ -28,9 +28,9 @@
 	[  ] - Além disso, ele deve permitir excluir uma palavra de uma linha 
 	[OK] - bem como acrescentar.
 
- 	[  ] - Funções de marcar o tempo
+ 	[OK] - Funções de marcar o tempo
 		[OK] - Marcar Tempo da Inserção
-		[  ] - Marcar Tempo de busca
+		[OK] - Marcar Tempo de busca
 */
 
 //----------------------------------------------------------//
@@ -53,7 +53,7 @@ int menu(){
 	printf("[4] - Apresentacao em pos-ordem \n");
 	printf("[5] - Buscar uma palavra        \n");
 	printf("[6] - Inserir uma nova palavra  \n");
-	printf("[7] - Remover uma palavra       \n");
+	//printf("[7] - Remover uma palavra       \n");
 	printf("[0] - Sair\n");
 
 	ast();
@@ -122,10 +122,10 @@ int main(){
 				gestaoLER(arvore);
 				break;
 
-			case 7:
+			/*case 7:
 				// FUNÇÃO que remove uma palavra da árvore
 				//gestaoREMOVER(arvore);
-				break;
+				break;*/
 
 			default:
 				// MENSAGEM DE ERRO

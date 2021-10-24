@@ -64,7 +64,7 @@ char lerPALAVRA(FILE *arq, char *palavra, int *linha, int *ordem) {
 	return c; }
 
 // Função que insere os dados do tempo marcado no arquivo *arq.
-void marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i){
+void marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i, int caso, int passos, char *foiENC){
 	double total;
 	double tempo_final;
 
@@ -77,7 +77,11 @@ void marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i){
 	mili = total / CLOCKS_PER_SEC;
 	seg = mili * 1000;
 
-	fprintf(arq, "%d,%s,%lf,%lf\n", i, palavra, mili, seg); }
+	if( caso == 1 )
+		fprintf(arq, "%d,%s,%lf,%lf\n", i, palavra, mili, seg);
+	else{
+		fprintf(arq, "%s,%s,%d,%lf,%lf\n", palavra, foiENC, passos, mili, seg);
+	} }
 
 // Função que ler o arquivo e manda para as funções de inserções.
 	// Segue a ordem:
@@ -114,18 +118,17 @@ void lerARQUIVO(FILE *arq, ARVORE *arvore){
 			i++;
 			tempo_palavra = clock();
 			gestaoINSERCAO(arvore, palavra, linha, ordem);
-			marcarTEMPO(insercaoARQ, palavra, &tempo_palavra, i);
+			marcarTEMPO(insercaoARQ, palavra, &tempo_palavra, i, 1, 0, NULL);
 		}
 
 		if(c == 10){
 			linha++;}
-		
 
 	} while(trava == 0);
 
 
 	fprintf(arq, "\n");
 
-	marcarTEMPO(insercaoARQ, "TOTAL:", &tempo_total, 0);
+	marcarTEMPO(insercaoARQ, "TOTAL:", &tempo_total, 0, 1, 0, NULL);
 	printf("Aquivo lido!\nTotal de Palavras inseridas = %d \n", i);
 	fclose(insercaoARQ); }

@@ -204,6 +204,7 @@ void insereLISTA(LISTA *lista, NO_LISTA *no){
 
 /* ----------------------------------- FUNÇÕES ARVORES ----------------------------------- */
 
+// Função que busca uma palavra.
 INFO *buscar(NO *raiz, char *palavra, int *passos){
 
 	INFO *encontrado;
@@ -241,28 +242,36 @@ INFO *buscar(NO *raiz, char *palavra, int *passos){
 	}
 	return encontrado; }
 
-
-
+// Função solicita que o usuário digite a palavra a ser buscada.
 void gestaoBUSCA(ARVORE *arvore){
-	
 	char palavra[101];
 	INFO *encontrado;
 	int passos = 0;
+	FILE *buscaARQ;
+	clock_t tempo;
 
 	printf("Digite a palavra que deseja buscar: ");
 	scanf(" %[^\n]s", palavra);
 	setbuf(stdin, NULL);
 	minusculo(palavra);
 	//
+	buscaARQ = fopen("busca.csv", "a");
+	tempo = clock();
 
 	encontrado = buscar(arvore->raiz, palavra, &passos);
 	
+	// marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i, int caso, int *passos, char *foiENC)
 	if(encontrado != NULL){
 		printf("Palavra encontrada! \n\n");
 		printf("Quantidade de passos para encontrar a palavra: %d \n", passos);
 		apresentaINFO(encontrado);
-	} else 
-		printf("Esta palavra nao foi encontrada! \n"); }
+		marcarTEMPO(buscaARQ, palavra, &tempo, 0, 2, passos, "SIM");
+	} else {
+		printf("Esta palavra nao foi encontrada! \n");
+		marcarTEMPO(buscaARQ, palavra, &tempo, 0, 2, passos, "NAO");
+	}
+
+	fclose(buscaARQ); }
 
 
 

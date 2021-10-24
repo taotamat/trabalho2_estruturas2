@@ -322,21 +322,31 @@ void gestaoBUSCA(ARVORE *arvore){
 	char palavra[101];
 	NO *encontrado;
 	int passos = 0;
+	FILE *buscaARQ;
+	clock_t tempo;
 
 	printf("Digite a palavra que deseja buscar: ");
 	scanf(" %[^\n]s", palavra);
 	setbuf(stdin, NULL);
 	minusculo(palavra);
 	//
+	buscaARQ = fopen("busca.csv", "a");
+	tempo = clock();
 
 	encontrado = buscar(arvore->raiz, palavra, &passos);
 	
+	// marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i, int caso, int *passos, char *foiENC)
 	if(encontrado != NULL){
 		printf("Palavra encontrada! \n\n");
 		printf("Quantidade de passos para encontrar a palavra: %d \n", passos);
 		apresentaNO(encontrado);
-	} else 
-		printf("Esta palavra nao foi encontrada! \n"); }
+		marcarTEMPO(buscaARQ, palavra, &tempo, 0, 2, passos, "SIM");
+	} else {
+		printf("Esta palavra nao foi encontrada! \n");
+		marcarTEMPO(buscaARQ, palavra, &tempo, 0, 2, passos, "NAO");
+	}
+
+	fclose(buscaARQ); }
 
 
 
