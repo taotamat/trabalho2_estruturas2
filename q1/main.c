@@ -26,6 +26,9 @@
 	[OK] - Além disso, ele deve permitir excluir uma palavra de uma linha 
 	[OK] - bem como acrescentar.
 
+	[ ] - Funções de marcar o tempo
+		[OK] - Marcar Tempo da Inserção
+		[  ] - Marcar Tempo de busca
 */
 
 //----------------------------------------------------------//
@@ -71,7 +74,7 @@ int main(){
 	ARVORE *arvore;
 	FILE *arq;
 
-	arq = fopen("arquivo2.txt", "r");
+	arq = fopen("arquivo.txt", "r");
 	arvore = alocaARV();
 
 	do{

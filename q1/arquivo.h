@@ -3,5 +3,7 @@
 // Funcoes do arquivo arquivo.c
 //char temACENTO(char *c);
 void minusculo(char *palavra);
-void lerPALAVRA(FILE *arq, char *palavra, int *linha, int *ordem);
+int tratarCARACTER(char *c);
+char lerPALAVRA(FILE *arq, char *palavra, int *linha, int *ordem);
+void marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i);
 void lerARQUIVO(FILE *arq, ARVORE *arvore);

@@ -57,9 +57,27 @@ char lerPALAVRA(FILE *arq, char *palavra, int *linha, int *ordem) {
 				i++; 
 			}
 		}
+		
+
 	} while(trava == 0);
 	
 	return c; }
+
+// Função que insere os dados do tempo marcado no arquivo *arq.
+void marcarTEMPO(FILE *arq, char *palavra, clock_t *tempo, int i){
+	double total;
+	double tempo_final;
+
+	double mili;
+	double seg;
+
+	tempo_final = clock();
+	total = tempo_final - *tempo;
+
+	mili = total / CLOCKS_PER_SEC;
+	seg = mili * 1000;
+
+	fprintf(arq, "%d,%s,%lf,%lf\n", i, palavra, mili, seg); }
 
 // Função que ler o arquivo e manda para as funções de inserções.
 	// Segue a ordem:
@@ -69,11 +87,20 @@ void lerARQUIVO(FILE *arq, ARVORE *arvore){
 	
 	char palavra[100];
 	int trava = 0;
+	char c;
+	int i = 0;
 
-	int linha = 1;
+	int linha = 0;
 	int ordem = 1;
 
-	char c;
+	FILE *insercaoARQ; // // Árquivo onde os resultados do teste de tempo serão salvos;
+	clock_t tempo_total; // tempo total para ler do arquivo e inserir todas as palavras.
+	clock_t tempo_palavra; // tempo para inserir tal palavra.
+
+	insercaoARQ = fopen("insercao.csv", "w");
+	fprintf(insercaoARQ, "nmr,palavra,milissegundos,segundos\n");
+
+	tempo_total = clock();
 
 	do{
 
@@ -84,12 +111,21 @@ void lerARQUIVO(FILE *arq, ARVORE *arvore){
 			// Todo o arquivo foi lido e o laço de repetição deve ser interrompido;
 			trava = 1;
 		} else {
+			i++;
+			tempo_palavra = clock();
 			gestaoINSERCAO(arvore, palavra, linha, ordem);
+			marcarTEMPO(insercaoARQ, palavra, &tempo_palavra, i);
 		}
 
 		if(c == 10){
 			linha++;}
+		
 
 	} while(trava == 0);
 
-	printf("Aquivo lido!\n"); }
+
+	fprintf(arq, "\n");
+
+	marcarTEMPO(insercaoARQ, "TOTAL:", &tempo_total, 0);
+	printf("Aquivo lido!\nTotal de Palavras inseridas = %d \n", i);
+	fclose(insercaoARQ); }
