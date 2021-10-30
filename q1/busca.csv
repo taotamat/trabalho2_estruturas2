@@ -1,6 +1,11 @@
-palavra,foi encontrado?,passos,milisegundos,segundos
-stay,NAO,7,0.000030,0.030000
-your,SIM,5,0.000161,0.161000
-gypsy,SIM,2,0.000107,0.107000
-chain,NAO,7,0.000024,0.024000
-underground,SIM,4,0.000139,0.139000
+palavra,encontrado?,passos,milissegundo,segundo
+chain,NAO,7,0.000032,0.032000
+stay,NAO,7,0.000024,0.024000
+somebody,NAO,7,0.000028,0.028000
+part,NAO,7,0.000042,0.042000
+work,NAO,6,0.000038,0.038000
+wish,SIM,5,0.000090,0.090000
+maybe,SIM,7,0.000049,0.049000
+your,SIM,5,0.000112,0.112000
+freedom,SIM,5,0.000099,0.099000
+underground,SIM,4,0.000102,0.102000
